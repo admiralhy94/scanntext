@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR IC Scanner - Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .result {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scanned Data</h1>
+    <div id="data-display">
+        <p><strong>Name:</strong> <span id="name"></span></p>
+        <p><strong>IC Number:</strong> <span id="ic-number"></span></p>
+        <p><strong>Address:</strong> <span id="address"></span></p>
+        <img id="ic-photo" alt="IC Photo" />
+    </div>
+
+    <script>
+        const nameField = document.getElementById('name');
+        const icNumberField = document.getElementById('ic-number');
+        const addressField = document.getElementById('address');
+        const icPhoto = document.getElementById('ic-photo');
+
+        window.onload = () => {
+            const name = localStorage.getItem('name');
+            const icNumber = localStorage.getItem('icNumber');
+            const address = localStorage.getItem('address');
+            const photo = localStorage.getItem('photo');
+
+            if (name && icNumber && address && photo) {
+                nameField.textContent = name;
+                icNumberField.textContent = icNumber;
+                addressField.textContent = address;
+                icPhoto.src = photo;
+            } else {
+                document.getElementById('data-display').innerHTML = '<p>No data available. Please scan an IC card first.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
